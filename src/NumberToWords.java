@@ -1,11 +1,17 @@
 public class NumberToWords {
 
     public static void numberToWords(int number) {
-        int reversedNumber = reverse(number);
-        int digitToPrint = 0;
+        if (number < 0) {
+            System.out.println("Invalid Value");
+        }
 
-        while (reversedNumber > 0) {
-            digitToPrint = reversedNumber % 10;
+        int reversedNumber = reverse(number);
+        int zeroCount = (getDigitCount(number)) - getDigitCount(reversedNumber);
+        int digitCount = getDigitCount(reversedNumber);
+
+        while (digitCount > 0) {
+            int digitToPrint = reversedNumber % 10;
+            digitCount--;
             switch (digitToPrint) {
                 default:
                     System.out.println("Invalid Value");
@@ -42,6 +48,9 @@ public class NumberToWords {
             }
             reversedNumber /= 10;
         }
+        for (int i = zeroCount; zeroCount > 0; zeroCount--) {
+            System.out.println("Zero");
+        }
     }
 
     public static int getDigitCount(int number) {
@@ -59,7 +68,7 @@ public class NumberToWords {
         return digitCount;
     }
 
-    public static int reverse (int number) {
+    public static int reverse(int number) {
         int reversed = 0;
 
         while (number != 0) {
